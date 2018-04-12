@@ -16,7 +16,7 @@
   },
   "repositories": [{
         "type": "vcs",
-        "url": "https://github.com/ipchelarov/minimal"
+        "url": "https://github.com/iliapchelarov/min-app.git"
     }
   ],
   "authors" : [{

@@ -17,6 +17,10 @@
   "repositories": [{
         "type": "vcs",
         "url": "https://github.com/iliapchelarov/min-app.git"
+    },
+    {
+	"type" : "composer",
+	"url" : "https://asset-packagist.org"
     }
   ],
   "authors" : [{

@@ -13,15 +13,22 @@ Nonce generation & verification demo.
 DESCRIPTION
 -----------
 The project aims at implementing nonce provisioning as used in WP Nonce, with [Composer](http://getcomposer.org/) and OOP practices.
-Specification:
-A nonce is a "number used once" to help protect URLs and forms from certain types of misuse, malicious or otherwise. WordPress nonces aren't numbers, but are a hash made up of numbers and letters. Nor are they used only once, but have a limited "lifetime" after which they expire. During that time period the same nonce will be generated for a given user in a given context. The nonce for that action will remain the same for that user until that nonce life cycle has completed.
+_Specification:_
+> A nonce is a "number used once" to help protect URLs and forms from certain types of misuse, malicious or otherwise. 
+> WordPress nonces aren't numbers, but are a hash made up of numbers and letters. Nor are they used only once, but have a limited "lifetime" after which they expire. 
+> During that time period the same nonce will be generated for a given user in a given context. The nonce for that action will remain the same for that user until that nonce life cycle has completed.
 
-https://codex.wordpress.org/WordPress_Nonces
-https://www.bynicolas.com/code/wordpress-nonce/
-https://codeseekah.com/2016/01/21/wordpress-nonces-vulnerabilities/
-https://en.wikipedia.org/wiki/Cryptographic_nonce
+_Resources:_
+*[Codex: WordPress Nonces](https://codex.wordpress.org/WordPress_Nonces)
+*[How do WordPress nonces really work](https://www.bynicolas.com/code/wordpress-nonce/)
+*[WordPress Nonces Vulnerabilities](https://codeseekah.com/2016/01/21/wordpress-nonces-vulnerabilities/)
+*[Cryptographic nonce](https://en.wikipedia.org/wiki/Cryptographic_nonce)
 
-The package is implemented so that it permits configuration and plugin of different nonce generation algorythms.
+For demo purposes only two basic functions are implemented:
+*[wp_create_nonce](https://codex.wordpress.org/Function_Reference/wp_create_nonce)
+*[wp_verify_nonce](https://codex.wordpress.org/Function_Reference/wp_verify_nonce)
+
+The package is designed so that it permits configuration and plugin of different nonce generation mechanisms.
 
 DIRECTORY STRUCTURE
 -------------------
@@ -47,9 +54,9 @@ If you do not have [Composer](http://getcomposer.org/), you may install it by fo
 at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
 You can then install this project template using the following command:
-
 ~~~
-composer create-project --prefer-dist --stability=dev ipchelarov/nonce-gen basic
+git clone https://github.com/iliapchelarov/nonce-gen.git 
+composer update
 ~~~
 
 CONFIGURATION

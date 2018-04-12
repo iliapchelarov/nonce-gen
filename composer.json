@@ -1,34 +1,66 @@
 {
-	"name" : "inpsyde/noncegen",
-	"description" : "Demo project nonce generation",
-	"keywords" : [
+	"name": "inpsyde/noncegen",
+	"description": "Demo project nonce generation",
+	"keywords": [
 		"dev template wp nonce"
 	],
-	"homepage" : "https://github.com/ipchelarov/nonce-gen",
-	"type" : "project",
-	"license" : "BSD-3-Clause",
-	"support" : {
-		"source" : "https://github.com/ipchelarov/nonce-gen"
+	"homepage": "https://github.com/ipchelarov/nonce-gen",
+	"type": "project",
+	"license": "BSD-3-Clause",
+	"support": {
+		"source": "https://github.com/ipchelarov/nonce-gen"
 	},
-	"minimum-stability" : "dev",
-  "require": {
-      "iliap/min": "^0.1"
-  },
-  "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/iliapchelarov/min-app.git"
-    },
-    {
-	"type" : "composer",
-	"url" : "https://asset-packagist.org"
-    }
-  ],
-  "authors" : [{
-			"name" : "Ilia Pchelarov",
-			"email" : "i.pchelarov@gmail.com",
-			"role" : "dev",
-			"homepage" : "https://github.com/iliapchelarov"
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "~2.0.14"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^6.5"
+	},
+	"config": {
+		"process-timeout": 1800,
+		"fxp-asset": {
+			"enabled": false
+		}
+	},
+	"autoload": {
+		"classmap": [
+			"src/",
+			"tests/"
+		]
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"yii\\composer\\Installer::postInstall"
+		],
+		"post-create-project-cmd": [
+			"yii\\composer\\Installer::postCreateProject",
+			"yii\\composer\\Installer::postInstall"
+		]
+	},
+	"extra": {
+		"yii\\composer\\Installer::postCreateProject": {
+			"setPermission": [
+				{
+					"runtime": "0777",
+					"yii": "0755"
+				}
+			]
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://asset-packagist.org"
+		}
+	],
+	"authors": [
+		{
+			"name": "Ilia Pchelarov",
+			"email": "i.pchelarov@gmail.com",
+			"role": "dev",
+			"homepage": "https://github.com/iliapchelarov"
 		}
 	]
-
 }

@@ -1,0 +1,30 @@
+{
+	"name" : "inpsyde/noncegen",
+	"description" : "Demo project nonce generation",
+	"keywords" : [
+		"dev template wp nonce"
+	],
+	"homepage" : "https://github.com/ipchelarov/nonce-gen",
+	"type" : "project",
+	"license" : "BSD-3-Clause",
+	"support" : {
+		"source" : "https://github.com/ipchelarov/nonce-gen"
+	},
+	"minimum-stability" : "dev",
+  "require": {
+      "iliap/min": "^0.1"
+  },
+  "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/ipchelarov/minimal"
+    }
+  ],
+  "authors" : [{
+			"name" : "Ilia Pchelarov",
+			"email" : "i.pchelarov@gmail.com",
+			"role" : "dev",
+			"homepage" : "https://github.com/iliapchelarov"
+		}
+	]
+
+}

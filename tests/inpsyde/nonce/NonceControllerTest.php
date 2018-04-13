@@ -115,11 +115,16 @@ class NonceControllerTest extends TestCase
         $codea = 1;
         $codeb = 2;
         
+        //create nonce
         $key = "abc";
         $code = $controller->createNonce($key);
+        
+        //test other nonces...
         for ($i = TestNonceCGenerator::MIN; $i <= TestNonceCGenerator::MAX; $i++) {
             $this->assertNotTrue($i != $code && $controller->verifyNonce($i, $key));
         }
+        
+        //verify
         $this->assertTrue($controller->verifyNonce($code, $key));
         
         //deleted!
@@ -129,6 +134,7 @@ class NonceControllerTest extends TestCase
         $this->assertTrue($test->save(true));
         $this->assertTrue($controller->verifyNonce($code, $key));
         sleep(1);
+        
         //expired!
         $this->assertNotTrue($controller->verifyNonce($code, $key));
     }

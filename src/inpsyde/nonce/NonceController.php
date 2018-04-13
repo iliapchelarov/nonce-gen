@@ -38,7 +38,13 @@ class NonceController {
         return $code;
     }
 
-    public function createNonce($key) {
+    /**
+     * 
+     * @param string $key to associate with created nonce
+     * @throws \InvalidArgumentException
+     * @return string
+     */
+    public function createNonce($key): string {
         $ncode = (string) $this->createUniqueCode($key);
 
         $nonce = new Nonce(
@@ -53,7 +59,14 @@ class NonceController {
           throw new \InvalidArgumentException(implode(", ", $nonce->getErrorSummary(true)));
     }
 
-    public function verifyNonce($nonce, $key, $keepAlive = false) {
+    /**
+     * 
+     * @param string $nonce the nonce to check against key
+     * @param string $key the key to check with nonce
+     * @param boolean $keepAlive retain the nonce for further use (true) or destroy it (false) - default
+     * @return boolean verified or not
+     */
+    public function verifyNonce($nonce, $key, $keepAlive = false): bool {
         $record = Nonce::getModel($nonce);
         if (isset($record) && $record->verifyIt()) {
             if ($record->isExpired()) {

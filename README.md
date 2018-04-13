@@ -24,11 +24,11 @@ _Resources:_
 * [WordPress Nonces Vulnerabilities](https://codeseekah.com/2016/01/21/wordpress-nonces-vulnerabilities/)
 * [Cryptographic nonce](https://en.wikipedia.org/wiki/Cryptographic_nonce)
 
-Having in mind the above mentioned limitations, a generic model is developed. Only two basic functions are implemented. All additional API can be derived from them:
+Having in mind the above mentioned limitations, a generic model is developed. Only two basic functions are covered. All additional APIs can be derived from them:
 * [wp_create_nonce](https://codex.wordpress.org/Function_Reference/wp_create_nonce)
 * [wp_verify_nonce](https://codex.wordpress.org/Function_Reference/wp_verify_nonce)
 
-The package is designed so that it permits configuration and plugin of different nonce generation mechanisms, such as the WP Nonce generation or different ones. The former is simple and has advantages regarding performance and state persistence. However, it is deterministic and has certain drawbacks for security. Whenever security is at stake - another generation, independent from the request (i.e. random), is preferable. The implementation is NOT thread safe, but could be done so in the next version.
+The package is designed so, that it permits configuration and plug-in of different nonce generations, such as the WP Nonce generation or others. The former is simple and has advantages regarding performance and state persistence. However, it is deterministic and has certain drawbacks for security. Whenever security is at stake - another generation, independent from the request (i.e. random), is preferable. The implementation is NOT thread safe, but could be made so in the next version.
 
 DIRECTORY STRUCTURE
 -------------------

@@ -43,7 +43,7 @@ REQUIREMENTS
 ------------
 
 The minimum requirement by this project is that your host supports PHP 5.4.0.
-The package uses database for persisting the nonces. MySQL and SQLite are tested and a PDO driver for at least one of them is needed.
+The package uses database for persisting the nonces. MySQL and SQLite are tested and a PDO driver for at least one of them is required.
 
 INSTALLATION
 ------------

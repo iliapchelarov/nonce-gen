@@ -100,14 +100,16 @@ class NonceTest extends TestCase
       $code = $generator->generateNonce() + 100;
       $timeout = 2;
 
-      $nonce = new Nonce();
-      $nonce->nonce = $code;
-      $nonce->key = NonceFixture::TEST_KEY;
-      $nonce->expires = time() + $timeout;
+      $nonce = new Nonce(
+          $code,
+          NonceFixture::TEST_KEY,
+          time() + $timeout
+        );
+      
       $this->assertTrue($nonce->save(true), implode(", ", $nonce->getErrorSummary(true)));
 
       try {
-          $n = new Nonce(NonceFixture::TEST_CODE);
+        $n = new Nonce(NonceFixture::TEST_CODE);
         $n->expectUnique();
         $this->fail("not unique");
       } catch (InvalidArgumentException $e) {
@@ -150,7 +152,7 @@ class NonceTest extends TestCase
       ]);
       $this->assertNotTrue($n->validate());
       $this->assertArrayHasKey('nonce', $n->getErrors());
-      $n->nonce = $code;
+      $n->nonce = (string) $code;
       $this->assertTrue($n->validate());
       
 
@@ -184,7 +186,7 @@ class NonceTest extends TestCase
       //nonce exists
       $this->assertNotTrue($n->validate());
       $this->assertArrayHasKey('nonce', $n->getErrors());
-      $n->nonce = $code;
+      $n->nonce = (string) $code;
       $this->assertTrue($n->validate());
       
 
@@ -247,7 +249,7 @@ class NonceTest extends TestCase
 }
 
 class TestNonceGenerator implements iNonceGenerator {
-    public function generateNonce(): int {
+    public function generateNonce($message = null): int {
         $r = rand(NonceTest::MIN, NonceTest::MAX);
         return $r;
     }

@@ -25,17 +25,21 @@ class NonceController {
         return $this->nonceGen->getExpiration($time);
     }
     
-    public function createUniqueCode() {
+    public function createUniqueCode($key = null) {
         $code = null;
+        $i = 0;
         do {
-            $code = $this->nonceGen->generateNonce();
-        } while (!$this->isUniqueNonce($code));
+            if ($i > 20 && $key != null) {$key .= rand(11, 99);}
+            
+            $code = $this->nonceGen->generateNonce($key);
+            
+        } while (!$this->isUniqueNonce($code) && $i++ < 100);
 
         return $code;
     }
 
     public function createNonce($key) {
-        $ncode = $this->createUniqueCode();
+        $ncode = (string) $this->createUniqueCode($key);
 
         $nonce = new Nonce(
           $ncode,
@@ -46,7 +50,7 @@ class NonceController {
         if ($nonce->save(true)) {
             return $nonce->nonce;
         } else
-          throw new \InvalidArgumentException($nonce->getErrorSummary());
+          throw new \InvalidArgumentException(implode(", ", $nonce->getErrorSummary(true)));
     }
 
     public function verifyNonce($nonce, $key, $keepAlive = false) {

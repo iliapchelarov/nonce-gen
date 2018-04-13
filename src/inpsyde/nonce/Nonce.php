@@ -8,9 +8,9 @@ use InvalidArgumentException;
  * This is the model class for table "nonce".
  *
  * @property int $id
- * @property int $nonce
+ * @property string $nonce
  * @property string $key
- * @property string expires
+ * @property int expires
  */
 class Nonce extends \yii\db\ActiveRecord
 {
@@ -34,6 +34,38 @@ class Nonce extends \yii\db\ActiveRecord
         $this->setValues($code, $key, $time);
     }
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Model::setAttributes()
+     */
+    public function setAttributes($values, $safeOnly = true)
+    {
+        if (key_exists(Nonce::CODE, $values)) {
+            $values[Nonce::CODE] = (string) $values[Nonce::CODE];
+        }
+        parent::setAttributes($values, $safeOnly);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\StaticInstanceInterface::instance()
+     */
+    public static function instance($refresh = false)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Arrayable::toArray()
+     */
+    public function toArray(array $fields = array(), array $expand = array(), $recursive = true)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
     public static function getModel($nonce) {
         return Nonce::findOne([self::CODE => $nonce]);
     }
@@ -51,7 +83,7 @@ class Nonce extends \yii\db\ActiveRecord
     }
 
     public function setValues($n, $k, $t = null) {
-        $this->nonce = $n;
+        $this->nonce = (string) $n;
         $this->key = $k;
         if ($t > 0){
             $this->expires = $t;
@@ -80,7 +112,7 @@ class Nonce extends \yii\db\ActiveRecord
       return [
           [['nonce', 'key'], 'required'],
           [['nonce'], 'unique'],
-          [['nonce'], 'integer'],
+          [['nonce'], 'string', 'max' => 16],
           [['key'], 'string', 'max' => 256],
           [['expires'], 'default', 'value' => time() + self::TIMEOUT],
           [['expires'], 'datetime', 'timestampAttribute' => 'expires'],

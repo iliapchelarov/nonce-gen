@@ -55,9 +55,7 @@ class NonceControllerTest extends TestCase
         while (count($codes) < $limit) {
             $code = $controller->createUniqueCode();
             $this->assertNotTrue(key_exists("code:$code", $codes), "is unique new code: " . $code . " from: [" . implode(", ", $codes) . "]");
-            $nonce = new Nonce();
-            $nonce->nonce = $code;
-            $nonce->key = "x";
+            $nonce = new Nonce($code, "x");
             $this->assertTrue($nonce->save(true));
             array_push($codes, "code:$code");
         }
@@ -146,7 +144,7 @@ class TestNonceCGenerator implements iNonceGenerator {
     $this->max = $max;
     $this->min = $min;
   }
-    public function generateNonce(): int {
+  public function generateNonce($message = null): int {
         $r = rand($this->min, $this->max);
         return $r;
     }

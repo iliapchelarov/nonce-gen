@@ -15,9 +15,9 @@ class m180406_114741_create_nonce_table extends Migration
     {
         $this->createTable('nonce', [
             'id' => $this->primaryKey(),
-        	'nonce' => $this->integer(10)->notNull()->unique(),
+            'nonce' => $this->integer(10)->notNull()->unique(),
             'key' => $this->string(256)->notNull(),
-            'expires' => $this->datetime()->notNull(),
+            'expires' => $this->integer(10)->notNull(),
         ]);
     }
 
